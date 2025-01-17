@@ -171,7 +171,7 @@ them a walk in the park!</EnglishText>
       <JapaneseText>氷がバイラス化し鳥の形になったバイラス。
 なかなかすばしっこくてあなどれないネ。
 ボクの炎で溶かしちゃうぞ！</JapaneseText>
-      <EnglishText>An ice Birus is the shape of a bird.
+      <EnglishText>An ice Birus in the shape of a bird.
 Smart like a crow, but no match for
 my flames!</EnglishText>
       <Notes/>
@@ -449,9 +449,9 @@ Watch out for the poison gas!</EnglishText>
 It kicks with its hind legs, but when
 enraged, this cainine bears its sharp
 canines.</EnglishText>
-      <Notes/>
+      <Notes>lauren is going to replace this one.</Notes>
       <Id>38</Id>
-      <Status>Proofreading</Status>
+      <Status>Problematic</Status>
     </Entry>
     <Entry>
       <PointerOffset>19700</PointerOffset>

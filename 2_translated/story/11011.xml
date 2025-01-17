@@ -323,7 +323,7 @@ I'll let you have them.</EnglishText>
     <Entry>
       <PointerOffset>2945</PointerOffset>
       <JapaneseText>ど、どうも、すみません……</JapaneseText>
-      <EnglishText>T-Thank you very much...</EnglishText>
+      <EnglishText>Th-Thank you very much...</EnglishText>
       <Notes/>
       <SpeakerId>4</SpeakerId>
       <Id>19</Id>
@@ -430,7 +430,7 @@ yet, I take it.</EnglishText>
       <JapaneseText>は、はい……覚書のように
 練習しているんですけど、
 なかなか……ごめんなさい。</JapaneseText>
-      <EnglishText>T-That right... I tried following those
+      <EnglishText>Th-That's right... I tried following those
 notes, but I haven't really... I'm sorry.</EnglishText>
       <Notes/>
       <SpeakerId>4</SpeakerId>
@@ -926,9 +926,9 @@ use it on command...</EnglishText>
       <JapaneseText>そうか。
 少しずつ慣れていけばいい。
 焦りや無理は禁物だ。</JapaneseText>
-      <EnglishText>I see. You need to take your
-time to get used to it. Don't
-rush it over overwork yourself.</EnglishText>
+      <EnglishText>I see. You need to take your time
+to get used to it. Don't rush it or
+you'll overwork yourself.</EnglishText>
       <Notes/>
       <SpeakerId>2</SpeakerId>
       <Id>75</Id>

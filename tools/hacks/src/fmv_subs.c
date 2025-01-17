@@ -10,27 +10,37 @@ DATA int sub_count = 0;
 DATA const fmv_sub *current_subs;
 DATA fontenv_struct fnt_env;
 DATA credit_line current_line;
+DATA u8 sub_offset = 0;
 
 void draw_line(int arg0);
 void populate_screen(const fmv_sub *sub);
 void fntenv_make_default(fontenv_struct *);
-int count_lines(char *);
-extern void fontenv_draw_centered(fontenv_struct *, char *);
+int count_lines(const char *);
+extern void fontenv_draw_centered(fontenv_struct *, const char *);
+extern void write_register(u32, u64);
+extern void func_00104F50(fontenv_struct *, u16, u16);
+extern void func_00104F60(fontenv_struct *, u16, u16);
+extern void func_00104F70(fontenv_struct *, u32);
+extern void func_00104F78(fontenv_struct *, u16, u16);
+extern void get_str_width(fontenv_struct *, const char *, u16 *, u16 *);
+extern void fontenv_set_palette(fontenv_struct *, int, int);
 
 int update_sub_callback(void)
 {
     // remove callbacks so the fmv will resume upon termination
-    if (sub_index == (sub_count-1))
+    if (sub_index == sub_count)
     {
         gMain.fmv_info.callback_0 = NULL;
         gMain.fmv_info.callback_1 = NULL;
     }
-
-    frame_counter++;
-    if (current_subs[sub_index + 1].start_frame <= frame_counter)
+    else
     {
-        sub_index++;
-        populate_screen(&current_subs[sub_index]);
+        frame_counter++;
+        if (current_subs[sub_index + 1].start_frame <= frame_counter)
+        {
+            sub_index++;
+            populate_screen(&current_subs[sub_index]);
+        }
     }
 
     return 0;
@@ -66,16 +76,16 @@ void populate_screen(const fmv_sub *sub)
         current_line.x = GS_X_COORD((SCREEN_WIDTH / 2)) - (width / 2);
         if (lines == 1)
         {
-            current_line.y = GS_Y_COORD(404);
+            current_line.y = GS_Y_COORD(404 + sub_offset);
         }
         else
         {
-            current_line.y = GS_Y_COORD(393);
+            current_line.y = GS_Y_COORD(393 + sub_offset);
         }
     }
 }
 
-int count_lines(char *str)
+int count_lines(const char *str)
 {
     int lines = 1;
     u8 chr;
@@ -118,7 +128,8 @@ void init_fmv_subs()
     int fmv_id;
     printf("Playing fmv -> %d - Flags -> %x\n", gMain.fmv_info.fmv_id, gMain.fmv_info.flags);
 
-    frame_counter = -1;
+    frame_counter = 0;
+    current_line.text = NULL;
     sub_index = 0;
 
     fmv_id = gMain.fmv_info.fmv_id - 17;
@@ -128,11 +139,21 @@ void init_fmv_subs()
         return;
     }
 
+    // Hack for the speech cutscene which has lower black bars
+    if (fmv_id == 0)
+    {
+        sub_offset = 7;
+    }
+    else
+    {
+        sub_offset = 0;
+    }
+
     fmv = &fmv_table[fmv_id];
 
     gMain.fmv_info.callback_0 = &update_sub_callback;
     gMain.fmv_info.callback_1 = &draw_text_callback;
-    sub_count = fmv->sub_count;
+    sub_count = fmv->sub_count - 1;
     current_subs = fmv->subs;
     return;
 }
